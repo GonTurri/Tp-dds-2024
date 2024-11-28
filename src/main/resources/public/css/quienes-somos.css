@@ -1,0 +1,15 @@
+:root {
+    --azul-oscuro: #202a3d;
+    --azul-intermedio: #3a4b6b;
+    --azul-claro: #516894;
+    --text-color: #ffffff;
+    --bg-light: #f4f6f9;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--azul-oscuro);
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
