@@ -1,0 +1,43 @@
+{{#partial "contenido"}}
+    <div id="map"></div>
+    <div class="form-container">
+        <label for="provincia">Provincia:</label>
+        <select id="provincia">
+            <option value="">Seleccionar</option>
+            <option value="caba">CABA</option>
+            <option value="cordoba">Córdoba</option>
+            <option value="santaFe">Santa Fe</option>
+            <option value="mendoza">Mendoza</option>
+            <option value="buenosAires">Buenos Aires</option>
+        </select>
+
+        <label for="localidad">Localidad:</label>
+        <select id="localidad">
+            <option value="">Seleccionar</option>
+        </select>
+
+        <button id="confirmar">Confirmar</button>
+
+
+        <div id="mensaje-error" class="error-message">Por favor, completa todos los campos.</div>
+    </div>
+
+
+
+{{/partial}}
+
+{{#partial "links"}}
+    <link rel="stylesheet" href="/css/puntosdonacion.css"/>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+    ></script>
+    <script src="/js/utils-heladeras.js"></script>
+    <script src="/js/puntos-mapa.js"></script>
+{{/partial}}
+
+{{> templates/app/base}}

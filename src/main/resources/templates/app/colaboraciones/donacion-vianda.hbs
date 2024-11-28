@@ -1,0 +1,210 @@
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/colaborar">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Donación de vianda</h1>
+
+        <form id="form-vianda" method="post" action="" class="content-center max-w-md mx-auto">
+
+            {{#if message}}
+                <p id="error-message" style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            {{/if}}
+
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de donación</label>
+            <input
+                    required
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="default-datepicker"
+                    name="fechaDonacion"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de donación"
+            />
+
+            <div id="viandas-container">
+                <!-- Contenedor donde se clonan las viandas -->
+                <div class="vianda">
+                    <strong>Vianda 1</strong>
+                    <label
+                            for="descripcion-vianda-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Descripción de la vianda</label>
+                    <input
+                            type="text"
+                            id="descripcion-vianda-1"
+                            name="desc-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Descripción"
+                            required
+                    />
+
+                    <label
+                            for="caducidad-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Fecha de caducidad</label>
+                    <input
+                            required
+                            datepicker
+                            datepicker-autohide
+                            datepicker-format="dd/mm/yyyy"
+                            autoSelectToday="1"
+                            id="caducidad-1"
+                            name="fechaCaducidad-1"
+                            type="text"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Fecha de caducidad"
+                    />
+
+                    <label
+                            for="calorias-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Calorías</label>
+                    <input
+                            type="number"
+                            id="calorias-1"
+                            name="calorias-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Calorías"
+                            min="1"
+                    />
+
+                    <label
+                            for="peso-1"
+                            class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Peso de la vianda (kg)</label>
+                    <input
+                            type="number"
+                            id="peso-1"
+                            name="peso-1"
+                            class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Peso (kg)"
+                            min="1"
+                            step="0.1"
+                    />
+                </div>
+            </div>
+
+            <input type="hidden" name="cant-viandas" id="cantidad-viandas" value="1">
+
+            <button type="button" id="add-vianda-btn"
+                    class="mt-2 mb-5 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-800">
+                Agregar otra vianda
+            </button>
+
+            <label
+                    for="map"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Seleccione la heladera donde realiza la donación</label
+            >
+            <div
+                    id="map"
+                    style="height: 300px; width: 100%; z-index: 50"
+                    class="mb-5"
+            ></div>
+            <div id="marker-template" style="display: none">
+                <div class="flex flex-col popup-content">
+                    <div class="popup-title"></div>
+                    <div
+                            class="popup-button"
+                            onclick="clickOnPopup(this)"
+                    >
+                        Seleccionar
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row">
+      <span
+              class="mr-1 text-left block mb-2 text-sm dark:text-white"
+      >Heladera seleccionada: </span
+      ><span
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    id="heladeraSeleccionada"
+            ></span>
+                <input
+                        type="hidden"
+                        name="idHeladera"
+                        id="idHeladera"
+                        required
+                />
+            </div>
+            <p id="heladera-error" class="text-red-500 text-sm hidden">Por favor, selecciona una heladera.</p>
+
+            <button
+                    id="enviar-vianda"
+                    type="submit"
+                    class="content-center max-w-md mx-auto w-full mt-2 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+            >
+                Registrar donación
+            </button>
+        </form>
+    </div>
+{{/partial}}
+
+{{#partial "links"}}
+    <link rel="stylesheet" href="/css/heladeras.css"/>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+    ></script>
+    <script src="/js/utils-heladeras.js"></script>
+    <script src="/js/heladeras-seleccion.js"></script>
+    <script>
+        document.getElementById('add-vianda-btn').addEventListener('click', function () {
+            const viandasContainer = document.getElementById('viandas-container');
+            const viandaCount = viandasContainer.getElementsByClassName('vianda').length;
+            const newVianda = viandasContainer.firstElementChild.cloneNode(true);
+
+            newVianda.querySelectorAll('input').forEach(function (input) {
+                const newId = input.id.split('-')[0] + '-' + (viandaCount + 1);
+                const newName = input.name.split('-')[0] + '-' + (viandaCount + 1);
+                input.id = newId;
+                input.value = '';
+                input.name = newName;
+            });
+
+            newVianda.querySelectorAll('label').forEach(function (label) {
+                const newFor = label.getAttribute('for').split('-')[0] + '-' + (viandaCount + 1);
+                label.setAttribute('for', newFor);
+            });
+
+            newVianda.querySelector('strong').textContent = `Vianda ${viandaCount + 1}`;
+
+            viandasContainer.appendChild(newVianda);
+            document.getElementById('cantidad-viandas').value = viandaCount + 1;
+
+            newVianda.querySelectorAll('[datepicker]').forEach(function (dateInput) {
+                new Datepicker(dateInput, {
+                    autohide: true,
+                    format: 'dd/mm/yyyy'
+                });
+            });
+        });
+    </script>
+    <script src="/js/form-handler-donacion.js"></script>
+    <script>
+        handleFormSubmit('form-vianda', 'enviar-vianda');
+    </script>
+{{/partial}}
+
+{{> templates/app/base}}

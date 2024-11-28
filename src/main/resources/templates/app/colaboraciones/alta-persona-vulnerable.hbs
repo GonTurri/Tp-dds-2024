@@ -1,0 +1,303 @@
+{{#partial "btn-volver"}}
+    <div class="flex">
+        <a href="/colaborar">
+            <button
+                    class="m-4 px-6 py-3 text-sm lg:text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform azulIntermedio rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            >
+                Volver
+            </button>
+        </a>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="p-10 mx-auto max-w-7xl">
+        <h1 class="title1 mb-8">Alta de persona vulnerable</h1>
+
+        <form id="form-vul" method="post" action="/colaborar/registrar-persona-vulnerable"
+              class="content-center max-w-md mx-auto">
+            {{#if message}}
+                <p id="error-message" style="background: rgb(255, 163, 163);"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{message}}</p>
+            {{/if}}
+            <label
+                    for="nombre"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Nombre</label
+            >
+            <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Nombre"
+                {{#if datosForm.nombre}}
+                    value="{{datosForm.nombre}}"
+                {{/if}}
+                    required
+            />
+
+            <label
+                    for="apellido"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Apellido</label
+            >
+            <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Apellido"
+                {{#if datosForm.apellido}}
+                    value="{{datosForm.apellido}}"
+                {{/if}}
+                    required
+            />
+
+            <label
+                    for="tipo-documento"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Tipo de documento</label
+            >
+            <select
+                    id="tipo-documento"
+                    name="tipoDocumento"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+                {{#each tiposDocumento}}
+                    <option value={{this.valor}}>{{this.descripcion}}</option>
+                {{/each}}
+            </select>
+
+            <label
+                    for="documento"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Número de documento</label
+            >
+            <input
+                    type="text"
+                    id="documento"
+                    name="nroDocumento"
+                    aria-describedby="helper-text-explanation"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Documento"
+                {{#if datosForm.nroDocumento}}
+                    value="{{datosForm.nroDocumento}}"
+                {{/if}}
+                    required
+                    min="1"
+            />
+            <label
+                    for="default-datepicker"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Fecha de nacimiento</label
+            >
+            <input
+                    required
+                    datepicker
+                    datepicker-autohide
+                    datepicker-format="dd/mm/yyyy"
+                    autoSelectToday="1"
+                    id="default-datepicker"
+                    type="text"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Fecha de nacimiento"
+                    name="fechaNacimiento"
+                {{#if datosForm.fechaNacimiento}}
+                    value="{{datosForm.fechaNacimiento}}"
+                {{/if}}
+            />
+
+            <label
+                    for="posee-domicilio"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >¿Posee un domicilio?</label
+            >
+            <fieldset id="posee-domicilio">
+                <div class="flex items-center mb-2">
+                    <input
+                            id="con-domicilio"
+                            type="radio"
+                            name="posee-domicilio"
+                            value="si"
+                            required
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="con-domicilio"
+                            class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                        Sí
+                    </label>
+                </div>
+                <div class="flex items-center mb-5">
+                    <input
+                            id="sin-domicilio"
+                            type="radio"
+                            name="posee-domicilio"
+                            value="no"
+                            required
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="sin-domicilio"
+                            class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                        No
+                    </label>
+                </div>
+            </fieldset>
+
+            <div
+                    class="relative z-0 w-full mb-5 group text-left"
+                    style="display: none"
+                    id="divDomicilio"
+            >
+                <label
+                        for="domicilio"
+                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Domicilio</label
+                >
+                <input
+                        type="text"
+                        id="domicilio"
+                        name="domicilio"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Domicilio"
+                />
+            </div>
+
+            <label
+                    for="tiene-tutorados"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >¿Tiene menores a su cargo?</label
+            >
+            <fieldset id="tiene-tutorados">
+                <div class="flex items-center mb-2">
+                    <input
+                            id="si-tiene-tutorados"
+                            type="radio"
+                            name="tiene-tutorados"
+                            value="si"
+                            required
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="tiene-tutorados"
+                            class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                        Sí
+                    </label>
+                </div>
+                <div class="flex items-center mb-5">
+                    <input
+                            id="no-tiene-tutorados"
+                            type="radio"
+                            name="tiene-tutorados"
+                            value="no"
+                            required
+                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label
+                            for="no-tiene-tutorados"
+                            class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                        No
+                    </label>
+                </div>
+            </fieldset>
+
+            <div
+                    class="relative z-0 w-full mt-2 mb-5 group text-left"
+                    style="display: none"
+                    id="divCantMenores"
+            >
+                <label
+                        for="cant-menores"
+                        class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Cantidad de menores a cargo</label
+                >
+                <input
+                        name="cantMenores"
+                        type="number"
+                        id="cant-menores"
+                        aria-describedby="helper-text-explanation"
+                        class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Cantidad de menores a cargo"
+                        min="1"
+                />
+            </div>
+            <!-- todo, con estos luche como un enfermo para que se pueda hacer que te muestre el radio marcado o por lo menos que te muestre la direccion
+             pero si llegas a poner no y te queda la direccion que pusiste antes se guarda igual asi que no-->
+            <label
+                    for="cod-tarjeta"
+                    class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Código de la tarjeta que recibirá la persona</label
+            >
+            <input
+                    name="codTarjeta"
+                    type="text"
+                    id="cod-tarjeta"
+                    aria-describedby="helper-text-explanation"
+                    class="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Ingrese código"
+                {{#if datosForm.tarjeta.codigo}}
+                    value="{{datosForm.tarjeta.codigo}}"
+                {{/if}}
+                    required
+                    min="1"
+            />
+            <button
+                    id="enviar-vul"
+                    type="submit"
+                    class="content-center max-w-md mx-auto w-full mt-6 px-6 py-3 text-sm font-medium tracking-wide text-white transition-colors duration-300 transform botonFormularios rounded-lg hover:bg-blue-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-12"
+            >
+                Registrar donación
+            </button>
+        </form>
+    </div>
+{{/partial}}
+
+{{#partial "scripts"}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll(
+                    'input[name="posee-domicilio"]'
+            );
+            const divDomicilio = document.getElementById("divDomicilio");
+
+            radioButtons.forEach(function (radio) {
+                radio.addEventListener("change", function () {
+                    if (this.value === "si") {
+                        divDomicilio.style.display = "block";
+                    } else {
+                        divDomicilio.style.display = "none";
+                    }
+                });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll(
+                    'input[name="tiene-tutorados"]'
+            );
+            const divDomicilio = document.getElementById("divCantMenores");
+
+            radioButtons.forEach(function (radio) {
+                radio.addEventListener("change", function () {
+                    if (this.value === "si") {
+                        divDomicilio.style.display = "block";
+                    } else {
+                        divDomicilio.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="/js/alta-tarjeta.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script>
+        handleFormSubmit('form-vul', 'enviar-vul');
+    </script>
+{{/partial}}
+
+{{> templates/app/base}}
