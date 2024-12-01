@@ -1,5 +1,5 @@
 # Tp-dds-2024
-Proyecto mvc cliente liviano hecho con javalin y handlebars como template engine
+Proyecto mvc cliente liviano hecho con javalin, handlebars como template engine y hibernate como ORM
 
 ## Participantes
 
